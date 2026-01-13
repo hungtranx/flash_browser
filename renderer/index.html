@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+  <title>Flash Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toolbar">
+    <div id="nav-buttons">
+      <button id="back-btn" title="Back">&#8592;</button>
+      <button id="forward-btn" title="Forward">&#8594;</button>
+      <button id="refresh-btn" title="Refresh">&#8635;</button>
+      <button id="home-btn" title="Home">&#8962;</button>
+    </div>
+    <div id="url-bar">
+      <input type="text" id="url-input" placeholder="Enter URL..." autocomplete="off">
+      <button id="go-btn">Go</button>
+    </div>
+    <div id="flash-status">
+      <span id="flash-indicator"></span>
+    </div>
+  </div>
+
+  <!-- BrowserView renders below this toolbar area -->
+
+  <div id="status-bar">
+    <span id="status-text">Ready</span>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
