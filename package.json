@@ -4,12 +4,39 @@
   "description": "A simple browser for playing Flash games with PepperFlash support",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder --linux AppImage",
+    "build:deb": "electron-builder --linux deb",
+    "build:all": "electron-builder --linux AppImage deb"
   },
   "keywords": ["flash", "browser", "game", "electron"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^11.5.0"
+    "electron": "11.5.0",
+    "electron-builder": "22.14.13"
+  },
+  "build": {
+    "appId": "com.flashbrowser.app",
+    "productName": "FlashBrowser",
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "category": "Game"
+    },
+    "files": [
+      "**/*",
+      "!dist/**"
+    ],
+    "extraResources": [
+      {
+        "from": "plugins",
+        "to": "plugins",
+        "filter": ["**/*"]
+      }
+    ],
+    "asar": false
   }
 }

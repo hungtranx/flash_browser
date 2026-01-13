@@ -7,11 +7,26 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 
 // Flash spoofing is now handled by game-preload.js
 
+// Determine paths based on whether app is packaged or in development
+const isPackaged = app.isPackaged;
+const appPath = isPackaged ? path.dirname(app.getPath('exe')) : __dirname;
+const resourcesPath = isPackaged ? process.resourcesPath : __dirname;
+
+console.log('App packaged:', isPackaged);
+console.log('App path:', appPath);
+console.log('Resources path:', resourcesPath);
+
 // PepperFlash plugin paths to check
 const flashPaths = [
+  // Packaged app paths
+  path.join(resourcesPath, 'plugins', 'libpepflashplayer.so'),
+  path.join(resourcesPath, 'plugins', 'pepflashplayer.dll'),
+  path.join(resourcesPath, 'plugins', 'PepperFlashPlayer.plugin'),
+  // Development paths
   path.join(__dirname, 'plugins', 'libpepflashplayer.so'),
   path.join(__dirname, 'plugins', 'pepflashplayer.dll'),
   path.join(__dirname, 'plugins', 'PepperFlashPlayer.plugin'),
+  // System paths
   '/opt/google/chrome/PepperFlash/libpepflashplayer.so',
   '/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so',
   '/usr/lib/chromium/PepperFlash/libpepflashplayer.so',

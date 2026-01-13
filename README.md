@@ -2,6 +2,28 @@
 
 A simple Electron-based browser that allows you to play **Flash web games** on Linux (Debian, Ubuntu, Linux Mint, and similar distros) in 2024 and beyond.
 
+## Quick Start (Pre-built App)
+
+### Download & Run
+
+1. Go to [Releases](https://github.com/YOUR_USERNAME/flash-browser/releases)
+2. Download `FlashBrowser-1.0.0.AppImage`
+3. Make it executable and run:
+
+```bash
+chmod +x FlashBrowser-1.0.0.AppImage
+./FlashBrowser-1.0.0.AppImage
+```
+
+**Note:** If you get a FUSE error, install it first:
+```bash
+sudo apt install libfuse2
+```
+
+That's it! No Node.js required.
+
+---
+
 ## Why This Exists
 
 Adobe Flash was discontinued in 2020, and modern browsers no longer support Flash content. However, many classic web games still require Flash to run. This browser solves that problem by:
@@ -18,83 +40,13 @@ Adobe Flash was discontinued in 2020, and modern browsers no longer support Flas
 - Built-in PepperFlash plugin (v32.0.0.363)
 - Browser spoofing for games that require CocCoc/UC Browser/Coowon
 - Simple browser UI with navigation controls
-
-## Requirements
-
-- **Node.js** (v14 or higher)
-- **npm**
-- **Linux x64** (Debian, Ubuntu, Linux Mint, or similar)
-
-## Step-by-Step Installation Guide
-
-### Step 1: Install Node.js and npm
-
-If you don't have Node.js installed, run these commands:
-
-**Debian/Ubuntu/Linux Mint:**
-```bash
-# Update package list
-sudo apt update
-
-# Install Node.js and npm
-sudo apt install nodejs npm
-
-# Verify installation
-node --version
-npm --version
-```
-
-**Or use NodeSource for newer version:**
-```bash
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt install -y nodejs
-```
-
-### Step 2: Download This Project
-
-**Option A: Clone with Git**
-```bash
-# Install git if needed
-sudo apt install git
-
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/flash-browser.git
-
-# Enter the directory
-cd flash-browser
-```
-
-**Option B: Download ZIP**
-1. Click the green "Code" button on GitHub
-2. Click "Download ZIP"
-3. Extract the ZIP file
-4. Open terminal in the extracted folder
-
-### Step 3: Install Dependencies
-
-```bash
-# Inside the flash-browser folder, run:
-npm install
-```
-
-This will download Electron and other required packages. It may take a few minutes.
-
-### Step 4: Run the Browser
-
-```bash
-npm start
-```
-
-The Flash Browser window will open!
+- **Standalone AppImage** - no installation required
 
 ## How to Use
 
 ### Playing a Flash Game
 
-1. **Start the browser:**
-   ```bash
-   npm start
-   ```
+1. **Start the browser** (double-click AppImage or run from terminal)
 
 2. **Enter the game URL** in the address bar at the top
 
@@ -117,24 +69,53 @@ The Flash Browser window will open!
 | Green dot | Flash plugin loaded successfully |
 | Red dot | Flash plugin not found |
 
-### Example: Playing a Flash Game
+---
+
+## Build from Source
+
+If you want to build it yourself or contribute:
+
+### Requirements
+
+- **Node.js** (v14 or higher)
+- **npm**
+- **Linux x64** (Debian, Ubuntu, Linux Mint, or similar)
+
+### Step 1: Install Node.js and npm
 
 ```bash
-# 1. Open terminal in flash-browser folder
-cd flash-browser
-
-# 2. Start the browser
-npm start
-
-# 3. In the browser window, enter your game URL:
-#    Example: http://yourgame.com/play
-
-# 4. Login with your account
-
-# 5. Select your server
-
-# 6. Game loads and plays!
+sudo apt update
+sudo apt install nodejs npm
 ```
+
+### Step 2: Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/flash-browser.git
+cd flash-browser
+```
+
+### Step 3: Install Dependencies
+
+```bash
+npm install
+```
+
+### Step 4: Run in Development Mode
+
+```bash
+npm start
+```
+
+### Step 5: Build Standalone App
+
+```bash
+npm run build
+```
+
+Output will be in `dist/FlashBrowser-1.0.0.AppImage`
+
+---
 
 ## Project Structure
 
@@ -161,6 +142,11 @@ flash-browser/
 
 ## Troubleshooting
 
+### FUSE error when running AppImage
+```bash
+sudo apt install libfuse2
+```
+
 ### "Couldn't load plugin"
 - Make sure you're using Electron 11 (check `package.json`)
 - Verify `plugins/libpepflashplayer.so` exists
@@ -169,44 +155,14 @@ flash-browser/
 ### Game says "Flash not detected" or "Install CocCoc/UC Browser"
 - This should be handled automatically by `game-preload.js`
 - Check browser console (F12) for errors
-- Make sure you're using the latest version of this browser
 
 ### GPU crash on startup / Black screen
 - Already handled with `--disable-gpu` flag
-- If still happening, try: `npm start -- --disable-gpu`
 
 ### "Cannot find module 'electron'"
 ```bash
-# Reinstall dependencies
 rm -rf node_modules package-lock.json
 npm install
-```
-
-### Browser opens but shows blank/white screen
-```bash
-# Check for errors
-npm start
-
-# Look at terminal output for error messages
-```
-
-## Updating
-
-To get the latest version:
-
-```bash
-cd flash-browser
-git pull
-npm install
-npm start
-```
-
-## Uninstalling
-
-Simply delete the `flash-browser` folder:
-
-```bash
-rm -rf flash-browser
 ```
 
 ## Supported Games
@@ -218,9 +174,24 @@ This browser works with Flash games that:
 - Use online/cloud databases
 - Vietnamese Flash games (tested with chanlong.gaba.vn)
 
+## Creating a Release (for maintainers)
+
+1. Build the AppImage:
+   ```bash
+   npm run build
+   ```
+
+2. Go to GitHub repository → **Releases** → **Create new release**
+
+3. Tag: `v1.0.0`, Title: `Flash Browser v1.0.0`
+
+4. Upload `dist/FlashBrowser-1.0.0.AppImage`
+
+5. Publish release
+
 ## Keywords
 
-Flash player Linux, Flash games Linux, Flash browser Debian, Flash browser Ubuntu, PepperFlash Linux, play Flash games 2024, swfobject bypass, CocCoc browser alternative, UC Browser Flash Linux, Coowon Linux, Flash web games Linux, Electron Flash player, choi game flash tren linux, trinh duyet flash linux
+Flash player Linux, Flash games Linux, Flash browser Debian, Flash browser Ubuntu, PepperFlash Linux, play Flash games 2024, swfobject bypass, CocCoc browser alternative, UC Browser Flash Linux, Coowon Linux, Flash web games Linux, Electron Flash player, choi game flash tren linux, trinh duyet flash linux, game flash linux, appimage flash
 
 ## License
 
